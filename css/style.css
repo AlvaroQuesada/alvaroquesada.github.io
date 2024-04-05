@@ -8064,13 +8064,13 @@ h1, h2, h3, h4, h5,
   .social-media p a {
     width: 34px;
     height: 34px;
-    background: #4d4d4d;
+    background: #202020;
     margin-right: 1px; }
     .social-media p a span {
       color: #fff; }
     .social-media p a:hover {
-      background: #252525;
-      border-color: #252525; }
+      background: #202020;
+      border-color: #202020; }
       .social-media p a:hover span {
         color: #fff; }
 
