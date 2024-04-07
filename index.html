@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="estilos.css">
     <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
@@ -65,6 +66,7 @@
 	        	<li class="nav-item"><a href="about.html" class="nav-link">Nosotros</a></li>
 	        	<li class="nav-item"><a href="services.html" class="nav-link">Servicios</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contactos</a></li>
+				<li class="nav-item"><a href="index-dope.html" class="nav-link">Blog</a></li>
 	       
 	        </ul>
 	      </div>
@@ -73,13 +75,18 @@
     <!-- END nav -->
       
       <!-- Area de Inicio -->                      
-<section id="home">
+<section id="home" style="background-image:url(images/);" style="background-size: cover">
       
     <div class="hero-wrap">
 	    <div class="home-slider owl-carousel">
-	      <div class="slider-item" style="background-image:url(images/bg_1.jpg);">
+	      <div class="slider-item" style="background-image:url(images/Young couple talking and smiling.mp4);">
 	      	<div class="overlay"></div>
 	        <div class="container">
+				<video autoplay muted loop id="video-background">
+					<source src="images/Young couple talking and smiling.mp4" type="video/mp4">
+					<!-- Agrega más etiquetas <source> para formatos de video adicionales -->
+					Tu navegador no admite videos HTML5.
+				</video>
 	          <div class="row no-gutters slider-text align-items-center justify-content-center">
 		          <div class="col-md-10 ftco-animate">
 		          	<div class="text w-100 text-center">
@@ -92,9 +99,14 @@
 	        </div>
 	      </div>
 
-	      <div class="slider-item" style="background-image:url(images/bg_2.jpg);">
+	      <div class="slider-item" style="background-image:url();">
 	      	<div class="overlay"></div>
-	        <div class="container">
+	        <div class="container">				
+				<video autoplay muted loop id="video-background">
+				<source src="images/4100354-uhd_4096_2160_25fps.mp4" type="video/mp4">
+				<!-- Agrega más etiquetas <source> para formatos de video adicionales -->
+				Tu navegador no admite videos HTML5.
+			</video>
 	          <div class="row no-gutters slider-text align-items-center justify-content-center">
 		          <div class="col-md-10 ftco-animate">
 		          	<div class="text w-100 text-center">
@@ -107,9 +119,14 @@
 	        </div>
 	      </div>
 
-	      <div class="slider-item" style="background-image:url(images/bg_3.jpg);">
+	      <div class="slider-item" style="background-image:url();">
 	      	<div class="overlay"></div>
-	        <div class="container">
+	        <div class="container">				
+				<video autoplay muted loop id="video-background">
+				<source src="images/5330440-uhd_3840_2160_25fps.mp4" type="video/mp4">
+				<!-- Agrega más etiquetas <source> para formatos de video adicionales -->
+				Tu navegador no admite videos HTML5.
+			</video>
 	          <div class="row no-gutters slider-text align-items-center justify-content-center">
 		          <div class="col-md-10 ftco-animate">
 		          	<div class="text w-100 text-center">
@@ -122,9 +139,14 @@
 	        </div>
 	      </div>
             
-        	      <div class="slider-item" style="background-image:url(images/bg_6.jpg);">
+        	      <div class="slider-item" style="background-image:url();">
 	      	<div class="overlay"></div>
-	        <div class="container">
+	        <div class="container">				
+				<video autoplay muted loop id="video-background">
+				<source src="images/7308357-hd_1920_1080_30fps.mp4" type="video/mp4">
+				<!-- Agrega más etiquetas <source> para formatos de video adicionales -->
+				Tu navegador no admite videos HTML5.
+			</video>
 	          <div class="row no-gutters slider-text align-items-center justify-content-center">
 		          <div class="col-md-10 ftco-animate">
 		          	<div class="text w-100 text-center">
@@ -145,8 +167,8 @@
 					<div class="col-md-4">
 						<div class="intro-box w-100 d-flex">
 							<div class="icon d-flex align-items-center justify-content-center">
-								<span class="fa fa-phone"></span>
-							</div>
+								<div id="gif-container"><span class="fa fa-phone"><img src="images/Animation - 1712445582153.gif" width="50" height="50"></span></div>
+							</div>							
 							<div class="text pl-3">
 								<h4 class="mb-0">Llámenos: +51 921 831 688</h4>
 								<span> Perú, Lima.</span>
@@ -156,7 +178,7 @@
 					<div class="col-md-4">
 						<div class="intro-box w-100 d-flex">
 							<div class="icon d-flex align-items-center justify-content-center">
-								<span class="fa fa-clock-o"></span>
+								<span class="fa fa-clock-o"><img src="images/Animation - 1712445825579.gif" width="50" height="50"></span>
 							</div>
 							<div class="text pl-3">
 								<h4 class="mb-0">Horario de apertura</h4>
@@ -196,16 +218,16 @@
 </div>
 </section>
     
-        <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_4.jpg');" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-end">
-          <div class="col-md-9 ftco-animate pb-5">
-          	
-          </div>
-        </div>
-      </div>
-    </section> 
+<section class="hero-wrap hero-wrap-2" style="background-image: url('images/pexels-photo-9228363.jpg');" data-stellar-background-ratio="0.5">
+	<div class="overlay"></div>
+	<div class="container">
+	<div class="row no-gutters slider-text align-items-end">
+		<div class="col-md-9 ftco-animate pb-5">
+		
+		</div>
+	</div>
+	</div>
+</section> 
 
     <section class="ftco-section">
     	<div class="container">
@@ -215,53 +237,48 @@
             <span class="subheading">ofrecemos una variedad de terapias especializados</span>
           </div>
         </div>
-    		<div class="row">
-          <div class="col-md-3 d-flex services align-self-stretch px-4 ftco-animate">
-            <div class="d-block text-center">
-              <div class="icon d-flex justify-content-center align-items-center">
-            		<span class="flaticon-goal"></span>
-              </div>
-              <div class="media-body p-2 mt-3">
-                  <h3 class="heading">Terapia cognitivo-conductual</h3>
-                <p>Nuestros pilares para crear un ambiente propicio para el aprendizakje.</p>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md-3 d-flex services align-self-stretch px-4 ftco-animate">
-            <div class="d-block text-center">
-              <div class="icon d-flex justify-content-center align-items-center">
-            		<span class="flaticon-stress"></span>
-              </div>
-              <div class="media-body p-2 mt-3">
-                  <h3 class="heading">Terepia de addiciones</h3>
-                <p>Las addiciones son escenarios causados por situaciones desafortunadas que inhiben el correcto funcionamiento de la dopamina.</p>
-              </div>
-            </div>    
-          </div>
-          <div class="col-md-3 d-flex services align-self-stretch px-4 ftco-animate">
-            <div class="d-block text-center">
-              <div class="icon d-flex justify-content-center align-items-center">
-            		<span class="flaticon-crm"></span>
-              </div>
-              <div class="media-body p-2 mt-3">
-                <h3 class="heading">Reforzamiento acedémico</h3>
-                <p>Mientras el estudiante se sienta más y más elogiado, así sea por pequeños pasos que da hacia la realización de una tarea o actividad, más motivado se sentirá hacia realizar tareas mayores y más desafiantes. </p>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md-3 d-flex services align-self-stretch px-4 ftco-animate">
-            <div class="d-block text-center">
-              <div class="icon d-flex justify-content-center align-items-center">
-            		<span class="flaticon-marriage"></span>
-              </div>
-              <div class="media-body p-2 mt-3">
-                <h3 class="heading">Terapia de Pareja</h3>
-                <p>Tenemos la convicción de que el éxito en la vida tiene muchas más probabilidades de alcanzarse cuando se genera el ambiente y el contexto donde los valores, los indicadores del éxito y el progreso fluyan naturalmente en el propio hogar</p>
-              </div>
-            </div>      
-          </div>
-        </div>
-    	</div>
+		<div class="container-card">
+			<div class="card">
+				<figure>
+					<img src="https://welthy.es/wp-content/uploads/2022/10/cuantas-emociones-existen.jpg">
+				</figure>
+				<div class="contenido-card">
+					<h3>Terapia cognitivo-conductual</h3>
+					<p>Nuestros pilares para crear un ambiente propicio para el aprendizaje.</p>
+					<a href="#">Leer Más</a>
+				</div>
+			</div>
+			<div class="card">
+				<figure>
+					<img src="https://orbiumadicciones.com/wp-content/uploads/2021/12/cuando-aparece-sindrome-abstinencia-alcohol.jpg">
+				</figure>
+				<div class="contenido-card">
+					<h3>Terapia de adicciones</h3>
+					<p>Las adicciones son escenarios causados por situaciones desafortunadas que inhiben el correcto funcionamiento de la dopamina.</p>
+					<a href="#">Leer Más</a>
+				</div>
+			</div>
+			<div class="card">
+				<figure>
+					<img src="https://images.unsplash.com/photo-1599689868384-59cb2b01bb21?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bmklQzMlQjFvcyUyMGxleWVuZG98ZW58MHx8MHx8fDA%3D">
+				</figure>
+				<div class="contenido-card">
+					<h3>Reforzamiento académico</h3>
+					<p>Mientras el estudiante se sienta más y más elogiado, así sea por pequeños pasos que da hacia la realización de una tarea o actividad, más motivado se sentirá hacia realizar tareas mayores y más desafiantes. </p>
+					<a href="#">Leer Más</a>
+				</div>
+			</div>
+			<div class="card">
+				<figure>
+					<img src="https://mariatrusa.org/wp-content/uploads/2023/02/Amor-de-pareja-aprende-como-construir-vinculos-sanos-y-fuertes.jpg">
+				</figure>
+				<div class="contenido-card">
+					<h3>Terapia de Pareja</h3>
+					<p>Tenemos la convicción de que el éxito en la vida tiene muchas más probabilidades de alcanzarse cuando se genera el ambiente y el contexto donde los valores, los indicadores del éxito y el progreso fluyan naturalmente en el propio hogar</p>
+					<a href="#">Leer Más</a>
+				</div>
+			</div>
+		</div>     
     </section>
               
 <!-- Area de team -->                      
@@ -276,10 +293,10 @@
           </div>
         </div>
     		<div class="row d-flex no-gutters">
-    			<div class="col-md-6 d-flex">
-    				<div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-end mb-4 mb-sm-0" style="background-image:url(images/aboutOrlando.png);">
-    					<a href="#" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
-    						<span class="fa fa-play"></span>
+    			<div class="col-md-6 d-flex bruno">
+    				<div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-end mb-4 mb-sm-0" style="background-image:url(https://scontent-lim1-1.xx.fbcdn.net/v/t31.18172-8/29872109_10212431469205741_3883116677739586926_o.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeGrADci9n9AL9EAXMSjBXFrXtAWJ01hFfZe0BYnTWEV9qBNEmI45XkYdjPvieAe9tm1CZi76aBDr5Az19_fwcV1&_nc_ohc=nLxVduoku84Ab7ChzyG&_nc_ht=scontent-lim1-1.xx&oh=00_AfBE6CfQRSTnztFDumtTJJnfg4ByDyWo6mzxkO8DdlgLEg&oe=6639740D);">
+    					<a href="https://api.whatsapp.com/send?phone=51921831688&text=Un%20saludo.%20Quiero%20saber%20sobre%20los%20servicios%20de%20terapia" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
+    						<img src="images/Animation - 1712456664124.gif"></img>
     					</a>
     				</div>
     			</div>
@@ -413,6 +430,7 @@
     </section>
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.9/lottie.min.js"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/popper.min.js"></script>
