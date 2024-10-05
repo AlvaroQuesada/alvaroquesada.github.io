@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rendición de Cuenta</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+            }
+            .header {
+                border-bottom: 1px solid #000;
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .company-info {
+                margin-bottom: 10px;
+                flex-grow: 1;
+            }
+            .accounting-info {
+                text-align: right;
+            }
+            .logo {
+                max-width: 100px;
+                margin-right: 20px;
+            }
+            .rendition-number-box {
+                border: 2px solid #000;
+                border-radius: 5px;
+                padding: 20px;
+                text-align: center;
+                font-size: 24px;
+                width: 150px;
+                margin-left: 20px;
+            }
+            .table-container {
+                margin-top: 20px;
+                border: 1px solid #000;
+                border-collapse: collapse;
+                width: 100%;
+                overflow: auto;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            th, td {
+                border: 1px solid #000;
+                padding: 5px;
+                text-align: left;
+                font-size: 14px;
+                white-space: nowrap;
+                cursor: text; /* Cambia el cursor al pasar sobre una celda editable */
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+            .draggable {
+                cursor: move;
+            }
+            .editable {
+                background-color: #e7f3fe; /* Color de fondo para celdas editables */
+            }
+            .selected {
+                background-color: #cfe2f3; /* Color de fondo para filas seleccionadas */
+            }
+            .button-container {
+                margin: 20px 0;
+            }
+            button {
+                padding: 10px 15px;
+                margin-right: 10px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+<body>
+
+    <div class="header">
+        <img src="ruta/a/tu/logo.png" alt="Logo" class="logo"> <!-- Cambia esta ruta a la ubicación de tu logo -->
+        <div class="company-info">
+            <h1 id="company-name">Comercial y Servicios San Cayetano SAC</h1>
+            <p id="company-address">Av. Ejemplo 123, Lima, Perú</p>
+            <p id="company-phone">Teléfono: (01) 234-5678</p>
+            <p id="company-email">Email: contacto@cysancayetano.com</p>
+        </div>
+        <div class="accounting-info">
+            <p><strong>N° de Cheque/Transferencia:</strong> <span id="check-number">123456789</span></p>
+            <p><strong>Beneficiario:</strong> <span id="beneficiary">Juan Pérez</span></p>
+            <p><strong>Importe:</strong> <span id="amount">S/ 1,000.00</span></p>
+            <p><strong>Fecha:</strong> <span id="rendition-date">01/10/2024</span></p>
+        </div>
+        <div class="rendition-number-box" id="rendition-number-box">
+            <strong>N° de Rendición:</strong><br>
+            <span id="rendition-number">001</span>
+        </div>
+    </div>
+    <div class="button-container">
+        <button id="add-row">Agregar Fila</button>
+        <button id="remove-row">Eliminar Fila</button>
+    </div>
+    <div class="table-container">
+        <table id="rendition-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+
+                    <th>Fecha</th>
+                    <th>Doc Tipo</th>
+                    <th>Doc Serie</th>
+                    <th>Doc Número</th>
+                    <th>Proveedor</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Las filas se agregarán aquí dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Función para cargar los datos de la API
+        function loadTableData() {
+            fetch('http://localhost:3000/datos') // Cambia esta URL si es necesario
+                .then(response => response.json()) // Parsear la respuesta como JSON
+                .then(data => {
+                    // Llamar a la función para poblar la tabla con los datos recibidos
+                    const item = data
+                    document.getElementById('check-number').textContent = data[0]['N° Transferencia'];
+                    document.getElementById('beneficiary').textContent = data[0]['Beneficiado'];
+                    document.getElementById('amount').textContent = data[0]['Importe'];
+                    document.getElementById('rendition-number').textContent = data[0]['N° Rendicion'];  
+                    document.getElementById('rendition-date').textContent = data[0]['Fecha Rend'];
+                    populateTable(data);
+                })
+                .catch(error => {
+                    console.error('Error al cargar los datos:', error);
+                });
+        }
+
+        // Función para poblar la tabla con los datos obtenidos
+        function populateTable(data) {
+
+
+
+            const tableBody = document.querySelector('#rendition-table tbody');
+            tableBody.innerHTML = ''; // Limpiar el contenido anterior de la tabla
+
+            data.forEach((item, index) => {
+                const newRow = document.createElement('tr');
+
+                newRow.innerHTML = `
+                    <td>${index + 1}</td>
+
+                    <td>${item['Fecha']}</td>
+                    <td>${item['Doc Tipo']}</td>
+                    <td>${item['Doc Serie']}</td>
+                    <td>${item['Doc Numero']}</td>
+                    <td>${item['Proveedor']}</td>
+                    <td>${item['Descripcion']}</td>
+                    <td>${item['Precio']}</td>
+                `;
+
+                tableBody.appendChild(newRow);
+            });
+        }
+
+        // Cargar los datos automáticamente cuando el documento esté listo
+        loadTableData();
+    });
+
+        // Funcionalidad de arrastrar y soltar
+    const tableBody = document.querySelector('#rendition-table tbody');
+
+    tableBody.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        const dragging = document.querySelector('.dragging');
+        const rows = [...tableBody.querySelectorAll('tr:not(.dragging)')];
+
+        const nextRow = rows.find(row => {
+            return e.clientY <= row.getBoundingClientRect().top + row.clientHeight / 2;
+        });
+
+        tableBody.insertBefore(dragging, nextRow);
+    });
+
+    // Función para actualizar los números de fila
+    function updateRowNumbers() {
+        const rows = tableBody.querySelectorAll('tr');
+        rows.forEach((row, index) => {
+            row.querySelector('td').textContent = index + 1; // Actualizar el número de fila
+        });
+    }
+
+    // Funcionalidad para agregar fila
+    document.getElementById('add-row').addEventListener('click', () => {
+        const selectedRow = tableBody.querySelector('tr.selected');
+        const newRow = document.createElement('tr');
+        newRow.classList.add('draggable');
+        newRow.setAttribute('draggable', 'true');
+
+        newRow.innerHTML = `
+            <td></td>
+            <td contenteditable="true" class="editable"></td>
+            <td contenteditable="true" class="editable"></td>
+            <td contenteditable="true" class="editable"></td>
+            <td contenteditable="true" class="editable"></td>
+            <td contenteditable="true" class="editable"></td>
+            <td contenteditable="true" class="editable"></td>
+            <td contenteditable="true" class="editable"></td>
+
+        `;
+        tableBody.insertBefore(newRow, selectedRow ? selectedRow.nextSibling : null);
+        updateRowNumbers(); // Actualiza los números de fila
+    });
+
+    // Funcionalidad para eliminar fila
+    document.getElementById('remove-row').addEventListener('click', () => {
+        const selectedRow = tableBody.querySelector('tr.selected');
+        if (selectedRow) {
+            selectedRow.remove();
+            updateRowNumbers(); // Actualiza los números de fila
+        }
+    });
+
+    // Funcionalidad de selección de filas
+    tableBody.addEventListener('click', (e) => {
+        const rows = tableBody.querySelectorAll('tr');
+        rows.forEach(row => row.classList.remove('selected'));
+        if (e.target.closest('tr')) {
+            e.target.closest('tr').classList.add('selected');
+        }
+    });
+
+    // Manejo de eventos de arrastrar
+    document.querySelectorAll('.draggable').forEach(row => {
+        row.addEventListener('dragstart', () => {
+            row.classList.add('dragging');
+        });
+        row.addEventListener('dragend', () => {
+            row.classList.remove('dragging');
+            updateRowNumbers(); // Actualiza los números de fila después de arrastrar
+        });
+    });
+</script>
+
+</body>
+</html>

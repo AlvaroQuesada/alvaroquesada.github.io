@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rendición de Cuenta</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #0070C0;
+            color: white;
+        }
+        img {
+            width: 100px; /* Ajusta el tamaño del logo según sea necesario */
+        }
+        .hidden-table {
+            display: none;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Rendición de Cuenta</h1>
+    <img src="ruta/al/logo.png" alt="Logo"> <!-- Cambia la ruta por la de tu logo -->
+
+    <table id="rendicion-table">
+        <thead>
+            <tr>
+                <th>Número de Cheque/Transferencia</th>
+                <th>Beneficiario</th>
+                <th>Importe</th>
+                <th>Fecha</th>
+                <th>Número de Rendición de Cuenta</th>
+                <th>Detalles</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>123456</td>
+                <td>Juan Pérez</td>
+                <td>S/ 500.00</td>
+                <td>2024-10-04</td>
+                <td>RC-2024-001</td>
+                <td><button onclick="showDetails('RC-2024-001')">Ver Detalles</button></td>
+            </tr>
+            <tr>
+                <td>789012</td>
+                <td>Maria Gómez</td>
+                <td>S/ 750.00</td>
+                <td>2024-10-04</td>
+                <td>RC-2024-002</td>
+                <td><button onclick="showDetails('RC-2024-002')">Ver Detalles</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="details-container" class="hidden-table">
+        <h2>Detalles de Rendición de Cuenta</h2>
+        <div id="details-table"></div>
+        <button onclick="addRow()">Agregar Fila</button>
+    </div>
+
+    <script>
+        let currentDetails = []; // Datos para la tabla de detalles
+
+        // Inicializa Handsontable
+        function initHandsontable(data) {
+            const container = document.getElementById('details-table');
+            const hot = new Handsontable(container, {
+                data: data,
+                rowHeaders: true,
+                colHeaders: ['Fecha', 'N° Documento', 'Proveedor (a orden de)', 'Concepto', 'Importe'],
+                columns: [
+                    { data: 'fecha' },
+                    { data: 'numero_documento' },
+                    { data: 'proveedor' },
+                    { data: 'concepto' },
+                    { data: 'importe' }
+                ],
+                licenseKey: 'non-commercial-and-evaluation', // Para uso no comercial
+                filters: true,
+                dropdownMenu: true,
+                // Configuración para permitir arrastrar y soltar
+                manualRowMove: true,
+                manualColumnMove: true,
+                contextMenu: true,
+            });
+            return hot;
+        }
+
+        function showDetails(rendicion) {
+            // Aquí puedes cambiar los datos según la rendición seleccionada
+            currentDetails = [
+                { fecha: '2024-10-01', numero_documento: '001', proveedor: 'Proveedor A', concepto: 'Servicio X', importe: 'S/ 200.00' },
+                { fecha: '2024-10-02', numero_documento: '002', proveedor: 'Proveedor B', concepto: 'Servicio Y', importe: 'S/ 300.00' },
+            ];
+
+            // Mostrar detalles
+            document.getElementById('details-container').style.display = 'block';
+            const hot = initHandsontable(currentDetails);
+        }
+
+        function addRow() {
+            const newRow = { fecha: '', numero_documento: '', proveedor: '', concepto: '', importe: '' };
+            currentDetails.push(newRow);
+            initHandsontable(currentDetails);
+        }
+    </script>
+
+</body>
+</html>

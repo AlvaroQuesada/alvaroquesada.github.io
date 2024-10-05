@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de Rendición de Cuenta</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .details-header {
+            margin-top: 20px;
+        }
+        #details-table {
+            margin-top: 20px;
+            width: 100%;
+        }
+        .button {
+            margin: 5px;
+            padding: 5px 10px;
+            background-color: #0070C0;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #005a9c;
+        }
+        .handsontable {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Detalles de Rendición de Cuenta</h1>
+    <div class="details-header">
+        <p><strong>Rendición N°:</strong> <span id="rendicion-id"></span></p>
+        <p><strong>Beneficiario:</strong> <span id="beneficiario"></span></p>
+        <p><strong>Importe Total:</strong> <span id="importe"></span></p>
+    </div>
+
+    <div id="details-table"></div>
+    <button class="button" onclick="addRow()">Agregar Fila</button>
+    <button class="button" onclick="removeRow()">Quitar Fila</button>
+
+    <script>
+        // Obtener los parámetros de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const rendicionId = urlParams.get('rendicion');
+
+        // Datos iniciales (pueden cargarse desde un servidor)
+        const rendicionData = {
+            'RC-2024-001': {
+                beneficiario: 'Juan Pérez',
+                importe: 'S/ 500.00',
+                detalles: [
+                    { fecha: '2024-10-01', numero_documento: '001', proveedor: 'Proveedor A', concepto: 'Servicio X', importe: 'S/ 200.00' },
+                    { fecha: '2024-10-02', numero_documento: '002', proveedor: 'Proveedor B', concepto: 'Servicio Y', importe: 'S/ 300.00' }
+                ]
+            },
+            'RC-2024-002': {
+                beneficiario: 'Maria Gómez',
+                importe: 'S/ 750.00',
+                detalles: [
+                    { fecha: '2024-10-01', numero_documento: '003', proveedor: 'Proveedor C', concepto: 'Producto A', importe: 'S/ 400.00' },
+                    { fecha: '2024-10-03', numero_documento: '004', proveedor: 'Proveedor D', concepto: 'Producto B', importe: 'S/ 350.00' }
+                ]
+            }
+        };
+
+        // Mostrar los datos en la página
+        document.getElementById('rendicion-id').innerText = rendicionId;
+        document.getElementById('beneficiario').innerText = rendicionData[rendicionId].beneficiario;
+        document.getElementById('importe').innerText = rendicionData[rendicionId].importe;
+
+        // Inicializar Handsontable con los datos de la rendición seleccionada
+        let currentDetails = rendicionData[rendicionId].detalles;
+
+        function initHandsontable(data) {
+            const container = document.getElementById('details-table');
+            const hot = new Handsontable(container, {
+                data: data,
+                rowHeaders: true,
+                colHeaders: ['Fecha', 'N° Documento', 'Proveedor (a orden de)', 'Concepto', 'Importe'],
+                columns: [
+                    { data: 'fecha' },
+                    { data: 'numero_documento' },
+                    { data: 'proveedor' },
+                    { data: 'concepto' },
+                    { data: 'importe' }
+                ],
+                licenseKey: 'non-commercial-and-evaluation',
+                filters: true,
+                dropdownMenu: true,
+                manualRowMove: true,
+                manualColumnMove: true,
+                contextMenu: true,
+            });
+            return hot;
+        }
+
+        // Inicializar tabla con los detalles de la rendición
+        const hot = initHandsontable(currentDetails);
+
+        // Agregar nueva fila
+        function addRow() {
+            currentDetails.push({ fecha: '', numero_documento: '', proveedor: '', concepto: '', importe: '' });
+            hot.loadData(currentDetails);
+        }
+
+        // Quitar la última fila
+        function removeRow() {
+            if (currentDetails.length > 0) {
+                currentDetails.pop();
+                hot.loadData(currentDetails);
+            }
+        }
+    </script>
+
+</body>
+</html>

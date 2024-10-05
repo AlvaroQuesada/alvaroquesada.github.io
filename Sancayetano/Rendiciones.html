@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rendición de Cuenta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #0070C0;
+            color: white;
+        }
+        img {
+            width: 100px; /* Ajusta el tamaño del logo según sea necesario */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Rendición de Cuenta</h1>
+    <img src="ruta/al/logo.png" alt="Logo"> <!-- Cambia la ruta por la de tu logo -->
+
+    <table id="rendicion-table">
+        <thead>
+            <tr>
+                <th>Número de Cheque/Transferencia</th>
+                <th>Beneficiario</th>
+                <th>Importe</th>
+                <th>Fecha</th>
+                <th>Número de Rendición de Cuenta</th>
+                <th>Detalles</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>123456</td>
+                <td>Juan Pérez</td>
+                <td>S/ 500.00</td>
+                <td>2024-10-04</td>
+                <td>RC-2024-001</td>
+                <td><a href="detalles.html?rendicion=RC-2024-001">Ver Detalles</a></td>
+            </tr>
+            <tr>
+                <td>789012</td>
+                <td>Maria Gómez</td>
+                <td>S/ 750.00</td>
+                <td>2024-10-04</td>
+                <td>RC-2024-002</td>
+                <td><a href="detalles.html?rendicion=RC-2024-002">Ver Detalles</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

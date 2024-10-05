@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Rendición de Cuenta</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #0070C0;
+            color: white;
+        }
+        img {
+            width: 100px; /* Ajusta el tamaño del logo según sea necesario */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Rendición de Cuenta</h1>
+    <img src="ruta/al/logo.png" alt="Logo"> <!-- Cambia la ruta por la de tu logo -->
+
+    <table id="rendicion-table">
+        <thead>
+            <tr>
+                <th>Número de Cheque/Transferencia</th>
+                <th>Beneficiario</th>
+                <th>Importe</th>
+                <th>Fecha</th>
+                <th>Número de Rendición de Cuenta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>123456</td>
+                <td>Juan Pérez</td>
+                <td>S/ 500.00</td>
+                <td>2024-10-04</td>
+                <td>RC-2024-001</td>
+            </tr>
+            <tr>
+                <td>789012</td>
+                <td>Maria Gómez</td>
+                <td>S/ 750.00</td>
+                <td>2024-10-04</td>
+                <td>RC-2024-002</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button onclick="exportToExcel()">Exportar a Excel</button>
+    <button onclick="exportToPDF()">Exportar a PDF</button>
+
+    <script>
+        async function exportToExcel() {
+            const workbook = new ExcelJS.Workbook();
+            const worksheet = workbook.addWorksheet('Rendición de Cuenta');
+
+            // Cabecera
+            worksheet.addRow(['Número de Cheque/Transferencia', 'Beneficiario', 'Importe', 'Fecha', 'Número de Rendición de Cuenta']);
+
+            // Obtener datos de la tabla
+            const table = document.getElementById('rendicion-table');
+            const rows = table.getElementsByTagName('tr');
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                const rowData = [];
+                for (let j = 0; j < cells.length; j++) {
+                    rowData.push(cells[j].innerText);
+                }
+                worksheet.addRow(rowData);
+            }
+
+            // Exportar el archivo Excel
+            const buffer = await workbook.xlsx.writeBuffer();
+            const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'rendicion_de_cuenta.xlsx';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        function exportToPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Logo
+            const logo = new Image();
+            logo.src = 'ruta/al/logo.png'; // Cambia la ruta por la de tu logo
+            logo.onload = function() {
+                doc.addImage(logo, 'PNG', 10, 10, 40, 20); // Ajusta las coordenadas y tamaño
+                doc.text('Rendición de Cuenta', 60, 20);
+
+                // Tabla
+                const table = document.getElementById('rendicion-table');
+                const rows = table.getElementsByTagName('tr');
+                const headers = Array.from(rows[0].getElementsByTagName('th')).map(th => th.innerText);
+
+                // Agregar cabecera
+                doc.autoTable({
+                    head: [headers],
+                    body: Array.from(rows).slice(1).map(row => Array.from(row.getElementsByTagName('td')).map(td => td.innerText)),
+                    startY: 40
+                });
+
+                // Guardar el PDF
+                doc.save('rendicion_de_cuenta.pdf');
+            };
+        }
+    </script>
+
+</body>
+</html>
